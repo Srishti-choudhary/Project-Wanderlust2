@@ -52,7 +52,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-    mongoUrl: dbUrl,
+    mongoUrl:dbUrl,
     crypto: {
         secret: process.env.SECRET,
     },
@@ -106,7 +106,7 @@ app.use((req, res, next) => {
 app.get("/", wrapAsync(listingController.index));
 app.get("/listings", wrapAsync(listingController.index));
 
-app.post("/listings", isLoggedIn, upload.single('listing[image]'), validateListing, wrapAsync(listingController.createListing));
+app.post("/listings", isLoggedIn, upload.single('listing[image]'),validateListing, wrapAsync(listingController.createListing));
 
 //New route
 app.get("/listings/new", isLoggedIn, listingController.renderNewForm);

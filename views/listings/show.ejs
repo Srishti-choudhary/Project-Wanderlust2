@@ -12,6 +12,25 @@
         /* width: 50% !important; */
         
     }
+    .showreviewtitle{
+        font-size:medium;
+    }
+     
+    .reviewbg{
+        background-color: rgb(250, 248, 225);
+    }
+    .reviewbox{
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       grid-gap: 1rem;
+    }
+     @media only screen  and (max-width:450px){
+    .reviewbox{
+        grid-template-columns: 1fr;
+        margin-right: 2rem;
+    }
+}
+
     .show-card{
         width: 55% !important;
     }
@@ -45,6 +64,12 @@
     @media only screen  and (max-width:450px){
     .mapbox{
         width: 90% !important;
+    }
+}
+ @media only screen  and (max-width:450px){
+    
+    .showreviewtitle{
+        font-size: small;
     }
 }
 @media only screen  and ((min-width:451px) and (max-width:1024px)){
@@ -139,22 +164,23 @@
 
            
            <% if(listing.reviews.length>0){%>
-            <div class="row">
-                <p><b>All Reviews</b></p>
+            <p><b>All Reviews</b></p>
+            <div class="row reviewbox">
+                
                 <%for(review of listing.reviews){%>
-                    <div class="card col-5 ms-3 mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">@<%=review.author.username%></h5>
-                            <p class="starability-result" data-rating="<%=review.rating%>" class="card-text">
+                    <div class="card reviewbg ms-3 mb-3 ">
+                        <div class="card-body showreview">
+                            <h5 class="card-title  showreviewtitle">@<%=review.author.username%></h5>
+                            <p class="starability-result stars showreviewtitle" data-rating="<%=review.rating%>" class="card-text">
                             </p>
-                            <p class="card-text">
+                            <p class="card-text showreviewtitle">
                                 <%=review.comment%>
                             </p>
                            
                         </div>
                         <form class="mb-3" method="POST"
                             action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
-                            <button class="btn btn-sm btn-dark">Delete</button>
+                            <button class="btn btn-sm btn-dark mt-2">Delete</button>
                         </form>
                     </div>
                     <%}%>
